@@ -33,9 +33,9 @@ SP_FOLDER = os.environ["SP_FOLDER_PATH"]     # ex : /1_Extracts_Odoo
 
 # ─── Templates à extraire (idem version Mac) ──────────────────────
 EXPORTS = [
-    ("Workload project 1", "project.project", [], "Project__project_project___4_.xlsx"),
-    ("Workload 3",         "sale.order",      [], "Sales_Order__sale_order___5_.xlsx"),
-    ("Workload 7",         "project.task",    [], "Task__project_task___6_.xlsx"),
+    ("Workload project 1", "project.project", [], "Project.xlsx"),
+    ("Workload 3",         "sale.order",      [], "Sales_Order.xlsx"),
+    ("Workload 7",         "project.task",    [], "Task.xlsx"),
 ]
 
 
