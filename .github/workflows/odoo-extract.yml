@@ -2,10 +2,10 @@ name: Odoo Extract Daily
 
 on:
   schedule:
-    # 07:30 UTC = 09:30 Paris en été (CEST) / 08:30 Paris en hiver (CET)
-    # GitHub cron n'a pas de timezone. Si tu veux 09:30 pile en hiver,
-    # change pour '30 8 * * *' entre fin octobre et fin mars.
-    - cron: "30 7 * * *"
+    # 04:00 UTC = 06:00 Paris en été (CEST) / 07:00 Paris en hiver (CET)
+    # GitHub cron n'a pas de timezone. Si tu veux 06:00 pile en hiver,
+    # change pour '0 5 * * *' entre fin octobre et fin mars.
+    - cron: "0 4 * * *"
   workflow_dispatch:   # bouton "Run workflow" manuel
 
 jobs:
