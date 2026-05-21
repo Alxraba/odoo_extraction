@@ -65,6 +65,9 @@ def get_model_fields(models, uid, model_name):
 
 
 def resolve_label(models, uid, model_name, field_path):
+    # Cas spécial Odoo : .id = ID de base de données (libellé UI : "ID")
+    if field_path == ".id":
+        return "ID"
     parts, labels, current = field_path.split("/"), [], model_name
     for p in parts:
         info = get_model_fields(models, uid, current).get(p)
