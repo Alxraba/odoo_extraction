@@ -65,17 +65,22 @@ def get_model_fields(models, uid, model_name):
 
 
 def resolve_label(models, uid, model_name, field_path):
-    # Cas spécial Odoo : .id = ID de base de données (libellé UI : "ID")
-    if field_path == ".id":
-        return "ID"
-    parts, labels, current = field_path.split("/"), [], model_name
-    for p in parts:
-        info = get_model_fields(models, uid, current).get(p)
+    """Convertit 'partner_id/.id' en 'Customer/ID' (chemin de libellés Odoo)."""
+    parts = field_path.split("/")
+    labels = []
+    current_model = model_name
+    for part in parts:
+        # Pseudo-champ Odoo : .id = ID de base de données (libellé UI "ID")
+        if part == ".id":
+            labels.append("ID")
+            break   # .id est toujours terminal dans un chemin Odoo
+        info = get_model_fields(models, uid, current_model).get(part)
         if not info:
-            labels.append(p); break
-        labels.append(info.get("string") or p)
+            labels.append(part)
+            break
+        labels.append(info.get("string") or part)
         if info.get("relation"):
-            current = info["relation"]
+            current_model = info["relation"]
         else:
             break
     return "/".join(labels)
