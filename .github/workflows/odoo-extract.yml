@@ -5,7 +5,7 @@ on:
     # 04:15 UTC = 06:15 Paris en été (CEST) / 07:15 Paris en hiver (CET)
     # GitHub cron n'a pas de timezone. Si tu veux 06:15 pile en hiver,
     # change pour '15 5 * * *' entre fin octobre et fin mars.
-    - cron: "15 4 * * *"
+    - cron: "15 0 * * *"
   workflow_dispatch:   # bouton "Run workflow" manuel
 
 jobs:
