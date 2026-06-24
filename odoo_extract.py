@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Extraction Odoo + upload SharePoint — version GitHub Actions.
+Extraction Odoo  upload SharePoint — version GitHub Actions.
 
 Différences vs la version Mac :
   - Plus de Trousseau : tous les secrets viennent de variables d'environnement
@@ -50,8 +50,16 @@ def odoo_connect():
     return uid, xmlrpc.client.ServerProxy(f"{ODOO_URL}/xmlrpc/2/object")
 
 
+# Langue forcée pour toute l'extraction (en-têtes  données traduisibles).
+ODOO_LANG = os.environ.get("ODOO_LANG", "en_GB")
+
+
 def odoo_call(models, uid, model, method, args, kwargs=None):
-    return models.execute_kw(ODOO_DB, uid, ODOO_API_KEY, model, method, args, kwargs or {})
+    kwargs = dict(kwargs or {})
+    context = dict(kwargs.get("context") or {})
+    context.setdefault("lang", ODOO_LANG)
+    kwargs["context"] = context
+    return models.execute_kw(ODOO_DB, uid, ODOO_API_KEY, model, method, args, kwargs)
 
 
 _fields_cache = {}
